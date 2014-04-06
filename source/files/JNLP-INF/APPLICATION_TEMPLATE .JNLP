@@ -1,0 +1,41 @@
+
+<jnlp codebase="https://dropbox.world-images.org/CTPClient">
+  <information>
+    <title>CTP Client</title>
+    <vendor>RSNA</vendor>
+    <homepage href="http://mircwiki.rsna.org/index.php?title=CTP-The_RSNA_Clinical_Trial_Processor"/>
+    <description>WORLD Images DICOM Submission Tool</description>
+    <description kind="short">Java Web Start program for transmitting DICOM data to the WORLD Images intake system.</description>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.6+"/>
+    <jar href="CTPClient.jar"/>
+    <jar href="CTP.jar"/>
+    <jar href="dcm4che.jar"/>
+    <jar href="log4j.jar"/>
+    <jar href="util.jar"/>
+    <jar href="jdbm.jar"/>
+    <jar href="dcm4che-imageio-rle-2.0.25.jar"/>
+  </resources>
+  <application-desc main-class="client.CTPClient">
+    <argument>"windowTitle=World Images Dropbox"</argument>
+    <argument>"panelTitle=World Images Dropbox"</argument>
+    <argument>"showBrowseButton=yes"</argument>
+    <argument>"scpPort=11112"</argument>
+    <argument>"helpURL=https://dropbox.world-images.org/"</argument>
+    <argument>"acceptNonImageObject=no"</argument>
+    <argument>"daScriptName=DA.script"</argument>
+    <argument>"daLUTName=LUT.properties"</argument>
+    <argument>"httpURL=https://ctp-import.world-images.org:443"</argument>
+    <argument>"showURL=no"</argument>
+    <argument>"protocol=https"</argument>
+    <argument>"host=dropbox.world-images.org"</argument>
+    <argument>"application=CTPClient"</argument>
+    <argument>*</argument>
+    <argument>*</argument>
+    <argument>*</argument>
+  </application-desc>
+</jnlp>

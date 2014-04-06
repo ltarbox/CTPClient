@@ -67,6 +67,8 @@
 	<target name="jar" depends="init, getScripts, getLibraryJars">
 
 		<javac destdir="${build}" optimize="on"
+			    source="1.6"
+			    target="1.6"
 				classpathref="classpath"
 				includeantruntime="false"
 				debug="true" debuglevel="lines,vars,source">
@@ -82,10 +84,14 @@
 				<attribute name="Main-Class" value="client.CTPClient"/>
 				<attribute name="Implementation-Version" value="${today} @ ${now}"/>
 				<attribute name="Class-Path" value="util.jar log4j.jar dcm4che.jar dcm4che-imageio-rle-2.0.25.jar CTP.jar jdbm.jar"/>
-				<attribute name="Application-Name" value="CTP Client"/>
+				<attribute name="Application-Name" value="WoRLD Images CTP Client"/>
 				<attribute name="Permissions" value="all-permissions"/>
-				<attribute name="Codebase" value="*"/>
-			</manifest>
+				<attribute name="Codebase" value="https://dropbox.world-images.org"/>
+				<!--
+				<attribute name="Trusted-Only" value="true"/>
+				<attribute name="Application-Library-Allowable-Codebase" value="https://*.world-images.org https://*.cancerimagingarchive.net"/>
+				<attribute name="Caller-Allowable-Codebase" value="https://*.world-images.org"/>
+				-->			</manifest>
 			<fileset dir="${build}" includes="**"/>
 		</jar>
 
@@ -103,7 +109,10 @@
 			alias="${alias}"
 			keystore="${keystore}"
 			storepass="${password}"
+			keypass="${password}"
+			tsaurl="https://timestamp.geotrust.com/tsa"
 			preservelastmodified="true">
+			<!-- other options for tsaurl include http://timestamp.verisign.com and http://tsa.starfieldtech.com -->
 			<path>
 				<fileset dir="${products}" includes="*.jar" />
 			</path>
