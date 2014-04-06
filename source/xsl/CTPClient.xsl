@@ -4,15 +4,15 @@
 
 <xsl:template match="/jnlp">
     <jnlp
-        codebase="{environment/protocol}://{environment/host}/{environment/application}" >
+        codebase="https://dropbox.world-images.org/CTPClient" >
         <!-- href="{environment/application}.jnlp" > -->
 
         <information>
-            <title>CTP Client Utility</title>
+            <title>CTP Client</title>
             <vendor>RSNA</vendor>
             <homepage href="http://mircwiki.rsna.org/index.php?title=CTP-The_RSNA_Clinical_Trial_Processor"/>
-            <description>CTP Client Utility</description>
-            <description kind="short">Java Web Start program for transmitting data to CTP for clinical trials.</description>
+            <description>WORLD Images DICOM Submission Tool</description>
+            <description kind="short">Java Web Start program for transmitting DICOM data to the WORLD Images intake system.</description>
             <!-- <offline-allowed/> -->
         </information>
 
@@ -29,12 +29,28 @@
             <jar href="jdbm.jar"/>
             <jar href="log4j.jar"/>
             <jar href="util.jar"/>
-        </resources>
+         </resources>
 
         <application-desc main-class="client.CTPClient">
-            <argument>"protocol=<xsl:value-of select="environment/protocol"/>"</argument>
-            <argument>"host=<xsl:value-of select="environment/host"/>"</argument>
-            <argument>"application=<xsl:value-of select="environment/application"/>"</argument>
+            <argument>"windowTitle=World Images Dropbox"</argument>
+            <argument>"panelTitle=World Images Dropbox"</argument>
+            <argument>"showBrowseButton=yes"</argument>
+            <argument>"scpPort=11112"</argument>
+            <argument>"helpURL=https://dropbox.world-images.org/"</argument>
+            <argument>"acceptNonImageObject=no"</argument>
+            <argument>"daScriptName=DA.script"</argument>  
+            <argument>"daLUTName=LUT.properties"</argument>     
+            <argument>"httpURL=https://ctp-import.world-images.org:443"</argument>
+            <argument>"showURL=no"</argument>
+            <argument>"protocol=https"</argument>
+            <argument>"host=dropbox.world-images.org"</argument>
+            <argument>"application=CTPClient"</argument>
+            <!--
+            <argument>"@DROPBOXNAME=<xsl:value-of select="params/dropboxname"/>"</argument>
+            <argument>"@SITENAME=<xsl:value-of select="params/sitename"/>"</argument>
+            <argument>"@PROJECTNAME=<xsl:value-of select="params/projectname"/>"</argument>
+            -->
+            <!--<xsl:apply-templates select="params/*"/>-->
             <xsl:apply-templates select="params/param"/>
         </application-desc>
     </jnlp>
