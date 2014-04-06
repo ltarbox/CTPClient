@@ -455,7 +455,7 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 					parent,
 					"The selected images have been processed\n\n"
 					+"If you want to process more images, click YES.\n"
-					+"If you want to exit the program, click NO.\n\n",
+					+"If you want to save the ID table and exit the program, click NO.\n\n",
 					"Processing Complete",
 					JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE,
