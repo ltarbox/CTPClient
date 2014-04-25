@@ -113,6 +113,12 @@ public class SenderThread extends Thread {
 							//Get the PHI PatientID for the IDTable
 							String phiPatientName = dob.getPatientName();
 							String phiPatientID = dob.getPatientID();
+							String phiStudyDate = "No Date";
+							if ( ! dob.getStudyDate().isEmpty() ) {
+								phiStudyDate = dob.getStudyDate().substring(0,4) + "."
+												+ dob.getStudyDate().substring(4,6) + "."
+												+ dob.getStudyDate().substring(6);
+							}
 
 							//Anonymize the pixels and the rest of the dataset.
 							//This returns a new DicomObject in the temp directory.
@@ -122,7 +128,7 @@ public class SenderThread extends Thread {
 							//If all went well, update the idTable and export
 							if (dob != null) {
 								String anonPatientID = dob.getPatientID();
-								idTable.put(phiPatientName, phiPatientID, anonPatientID);
+								idTable.put(phiPatientName, phiPatientID, phiStudyDate, anonPatientID);
 								String status = "";
 
 								//Copy the file to the export directory, if so configured

@@ -22,8 +22,8 @@ public class IDTable {
 		table = new Hashtable<String,PatientInfo>();
 	}
 
-	public void put(String phiPatientName, String phiPatientID, String anonPatientID) {
-		table.put(phiPatientID, new PatientInfo(phiPatientName, phiPatientID, anonPatientID));
+	public void put(String phiPatientName, String phiPatientID, String phiStudyDate, String anonPatientID) {
+		table.put(phiPatientID, new PatientInfo(phiPatientName, phiPatientID, phiStudyDate, anonPatientID));
 	}
 
 	public void save(Component parent) {
@@ -44,12 +44,13 @@ public class IDTable {
 						sb.append(FileUtil.getText(file));
 					}
 					else {
-						sb.append("PatientName,PatientID,SubjectID,Transmitted\n");
+						sb.append("PatientName,PatientID,StudyDate,SubjectID,Transmitted\n");
 					}
 					for (String key : table.keySet()) {
 						PatientInfo info = table.get(key);
 						sb.append("\"=\"\"" + info.phiPatientName + "\"\"\",");
 						sb.append("\"=\"\"" + info.phiPatientID + "\"\"\",");
+						sb.append("\"=\"\"" + info.phiStudyDate + "\"\"\",");
 						sb.append("\"=\"\"" + info.anonPatientID + "\"\"\",");
 						sb.append("\"=\"\"" + info.datetime + "\"\"\"");
 						sb.append("\n");
@@ -63,12 +64,14 @@ public class IDTable {
 	class PatientInfo {
 		String phiPatientName;
 		String phiPatientID;
+		String phiStudyDate;
 		String anonPatientID;
 		String datetime;
 
-		public PatientInfo(String phiPatientName, String phiPatientID, String anonPatientID) {
+		public PatientInfo(String phiPatientName, String phiPatientID, String phiStudyDate, String anonPatientID) {
 			this.phiPatientName = phiPatientName.replaceAll(",", " ");
 			this.phiPatientID = phiPatientID;
+			this.phiStudyDate = phiStudyDate;
 			this.anonPatientID = anonPatientID;
 			this.datetime = StringUtil.getDateTime(" @");
 		}
