@@ -4,7 +4,7 @@
 
 <xsl:template match="/jnlp">
     <jnlp
-        codebase="https://dropbox.world-images.org/CTPClient" >
+        codebase="https://world-dropbox.wustl.edu/CTPClient/" >
         <!-- href="{environment/application}.jnlp" > -->
 
         <information>

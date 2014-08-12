@@ -86,7 +86,7 @@
 				<attribute name="Class-Path" value="util.jar log4j.jar dcm4che.jar dcm4che-imageio-rle-2.0.25.jar CTP.jar jdbm.jar"/>
 				<attribute name="Application-Name" value="WoRLD Images CTP Client"/>
 				<attribute name="Permissions" value="all-permissions"/>
-				<attribute name="Codebase" value="https://dropbox.world-images.org"/>
+				<attribute name="Codebase" value="https://world-dropbox.wustl.edu/"/>
 				<!--
 				<attribute name="Trusted-Only" value="true"/>
 				<attribute name="Application-Library-Allowable-Codebase" value="https://*.world-images.org https://*.cancerimagingarchive.net"/>
