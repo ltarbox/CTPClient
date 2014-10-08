@@ -20,13 +20,16 @@
     <jar href="jdbm.jar"/>
     <jar href="dcm4che-imageio-rle-2.0.25.jar"/>
   </resources>
-  <application-desc main-class="client.CTPClient">
+    <application-desc main-class="client.CTPClient">
     <argument>"windowTitle=World Images Dropbox"</argument>
     <argument>"panelTitle=World Images Dropbox"</argument>
     <argument>"showBrowseButton=yes"</argument>
     <argument>"scpPort=11112"</argument>
     <argument>"helpURL=https://dropbox.world-images.org/"</argument>
     <argument>"acceptNonImageObject=no"</argument>
+    <argument>"dialogEnabled=yes"</argument>
+    <argument>"dialogName=DIALOG.xml"</argument>
+    <argument>"showDialogButton=no"</argument>
     <argument>"daScriptName=DA.script"</argument>
     <argument>"daLUTName=LUT.properties"</argument>
     <argument>"httpURL=https://ctp-import.world-images.org:443"</argument>

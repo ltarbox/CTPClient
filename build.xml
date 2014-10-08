@@ -14,9 +14,10 @@
 	<property name="zip" value="${basedir}/zip"/>
 
 	<property name="signed" value="${basedir}/signed"/>
-	<property name="keystore" value="${files}/keystore"/>
-	<property name="password" value="ctpstore"/>
-	<property name="alias" value="ctp"/>
+
+	<property name="keystore" value="${source}/ERLcode.jks"/>
+	<property name="password" value="CHANGE-ME"/>
+	<property name="alias" value="ERLCode"/>
 
 	<path id="classpath">
 		<pathelement location="${libraries}/util.jar"/>

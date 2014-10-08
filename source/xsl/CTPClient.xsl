@@ -25,10 +25,10 @@
             <jar href="CTPClient.jar"/>
             <jar href="CTP.jar"/>
             <jar href="dcm4che.jar"/>
-            <jar href="dcm4che-imageio-rle-2.0.25.jar"/>
             <jar href="jdbm.jar"/>
             <jar href="log4j.jar"/>
             <jar href="util.jar"/>
+            <jar href="dcm4che-imageio-rle-2.0.25.jar"/>
          </resources>
 
         <application-desc main-class="client.CTPClient">
@@ -38,6 +38,9 @@
             <argument>"scpPort=11112"</argument>
             <argument>"helpURL=https://dropbox.world-images.org/"</argument>
             <argument>"acceptNonImageObject=no"</argument>
+            <argument>"dialogEnabled=yes"</argument>  
+            <argument>"dialogName=DIALOG.xml"</argument>  
+            <argument>"showDialogButton=no"</argument>  
             <argument>"daScriptName=DA.script"</argument>  
             <argument>"daLUTName=LUT.properties"</argument>     
             <argument>"httpURL=https://ctp-import.world-images.org:443"</argument>
