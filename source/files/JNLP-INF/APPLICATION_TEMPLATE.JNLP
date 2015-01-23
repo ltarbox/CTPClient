@@ -1,11 +1,11 @@
 
-<jnlp codebase="https://world-dropbox.wustl.edu/CTPClient/">
+<jnlp codebase="https://anchor.wustl.edu/CTPClient/">
   <information>
     <title>CTP Client</title>
     <vendor>RSNA</vendor>
     <homepage href="http://mircwiki.rsna.org/index.php?title=CTP-The_RSNA_Clinical_Trial_Processor"/>
     <description>WORLD Images DICOM Submission Tool</description>
-    <description kind="short">Java Web Start program for transmitting DICOM data to the WORLD Images intake system.</description>
+    <description kind="short">Java Web Start program for transmitting DICOM data to the ANCHOR archive via https.</description>
   </information>
   <security>
     <all-permissions/>
@@ -21,24 +21,20 @@
     <jar href="dcm4che-imageio-rle-2.0.25.jar"/>
   </resources>
     <application-desc main-class="client.CTPClient">
-    <argument>"windowTitle=World Images Dropbox"</argument>
-    <argument>"panelTitle=World Images Dropbox"</argument>
+    <argument>"windowTitle=ANCHOR Image Submission Tool"</argument>
+    <argument>"panelTitle=ANCHOR Image Submission Tool"</argument>
     <argument>"showBrowseButton=yes"</argument>
-    <argument>"scpPort=11112"</argument>
-    <argument>"helpURL=https://dropbox.world-images.org/"</argument>
+    <argument>"helpURL=https://anchor.wustl.edu/"</argument>
     <argument>"acceptNonImageObject=no"</argument>
     <argument>"dialogEnabled=yes"</argument>
     <argument>"dialogName=DIALOG.xml"</argument>
     <argument>"showDialogButton=no"</argument>
     <argument>"daScriptName=DA.script"</argument>
     <argument>"daLUTName=LUT.properties"</argument>
-    <argument>"httpURL=https://ctp-import.world-images.org:443"</argument>
+    <argument>"httpURL=https://anchor.wustl.edu:443/ctp/"</argument>
     <argument>"showURL=no"</argument>
     <argument>"protocol=https"</argument>
-    <argument>"host=dropbox.world-images.org"</argument>
+    <argument>"host=anchor.wustl.edu"</argument>
     <argument>"application=CTPClient"</argument>
-    <argument>*</argument>
-    <argument>*</argument>
-    <argument>*</argument>
   </application-desc>
 </jnlp>

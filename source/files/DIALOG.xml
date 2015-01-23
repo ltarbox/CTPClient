@@ -1,39 +1,23 @@
-<dialog title="Submission Batch">
-    <h align="left">Submit DICOM Data</h>
-    <p>       
-    </p>
-    <param
-        name="@DROPBOXNAME"
-        label="Ready to submit data from Dropbox: "
-        value=""
-        readonly="yes"
-    />
-    <p>If this is not the intended dropbox, please switch to the correct dropbox.</p>
-    <h align="left">Clinical Data</h>
-   <p>
-        If you have general occupational, task, or exposure information (e.g. bluejean sandblaster, 
-        underground gold miner, asbestos worker, etc.) related to this group of images please enter it here:
-    </p>
-    <param
-        name="@INDUSTRY"
-        label="Industry:"
-        value=""/>
-    <param
-        name="@OCCUPATION"
-        label="Occupation:"
-        value=""/>
-    <param
-        name="@EXPOSURE"
-        label="Other Exposure Info:"
-        value=""/>
+<dialog title="New Patient">
+    <h>New Patient</h>
+    <h align="left">Site Parameters</h>
     <p>
-        If you have additional clinical information for any of the images being submitted, 
-        please submit <a href="https://dropbox.world-images.org/CIRClinicalDataForm.pdf" target="_blank">Clinical Data Forms</a>, available on the Dropbox main menu.
+        Enter the ID value for this site.
     </p>
-     <param
-        name="@CLINICALINFO"
-        label="Will you be submitting additional information (yes/no):"
+    <param
+        name="@SITEID"
+        label="Site ID:"
         value=""/>
-
+    <h align="left">Patient Parameters</h>
+    <p>
+        Enter the anonymized ID and name values for this patient.
+    </p>
+    <param
+        name="@SUBJECTID"
+        label="Subject ID:"
+        value=""/>
+    <param
+        name="@SUBJECTNAME"
+        label="Subject Name:"
+        value=""/>
 </dialog>
-
