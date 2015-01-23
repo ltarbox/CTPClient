@@ -46,6 +46,7 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
     FieldButton dialogButton = null;
     FieldButton helpButton = null;
     FieldButton startButton = null;
+    FieldButton showMemoryButton = null;
     FieldButton showLogButton = null;
     FieldButton instructionsButton = null;
     int instructionsWidth = 425;
@@ -151,7 +152,7 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 		getDAScript();
 
 		//Get the LookupTable
-		 getLookupTable();
+		getLookupTable();
 
 		//Get the PixelScript
 		dpaPixelScript = getDPAPixelScriptObject();
@@ -266,6 +267,11 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 
 		//Make a footer bar to display status.
 		status = StatusPane.getInstance(" ", bgColor);
+		if (config.getProperty("showMemory", "no").equals("yes")) {
+			showMemoryButton = new FieldButton("Show Memory");
+			showMemoryButton.addActionListener(this);
+			status.addRightComponent(showMemoryButton);
+		}
 		showLogButton = new FieldButton("Show Log");
 		showLogButton.addActionListener(this);
 		status.addRightComponent(showLogButton);
@@ -360,6 +366,9 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 				BrowserUtil.openURL(helpURL);
 			}
 		}
+		else if (source.equals(showMemoryButton)) {
+			showMemory();
+		}
 		else if (source.equals(showLogButton)) {
 			showLog();
 		}
@@ -374,6 +383,27 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
         if (on) setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         else setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+
+	private void showMemory() {
+		Runtime runtime = Runtime.getRuntime();
+		long totalMemory = runtime.totalMemory();
+		long usedMemory = totalMemory - runtime.freeMemory();
+		long maxMemory = runtime.maxMemory();
+
+		StringBuffer sb = new StringBuffer();
+		Formatter formatter = new Formatter(sb);
+		sb.append( "Memory in use: " );
+		formatter.format("%,d bytes", usedMemory);
+		sb.append("\n");
+		sb.append( "JVM memory: "  );
+		formatter.format("%,d bytes", totalMemory);
+		sb.append( "\n" );
+		sb.append( "Max memory: "  );
+		formatter.format("%,d bytes", maxMemory);
+		sb.append( "\n" );
+
+		JOptionPane.showMessageDialog(this, sb.toString(), "Memory", JOptionPane.PLAIN_MESSAGE);
+	}
 
 	private void showLog() {
 		String text = Log.getInstance().getText().trim();
@@ -458,7 +488,7 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 				startButton.setEnabled(true);
 				int result = JOptionPane.showOptionDialog(
 					parent,
-					"The selected images have been processed\n\n"
+					"The selected images have been processed.\n\n"
 					+"If you want to process more images, click YES.\n"
 					+"If you want to save the ID table and exit the program, click NO.\n\n",
 					"Processing Complete",
@@ -591,6 +621,14 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 					}
 				}
 			}
+
+			//Fix the httpURL property for backward compatibility
+			String httpURL = props.getProperty("httpURL");
+			String url = props.getProperty("url");
+			if (((httpURL == null) || httpURL.equals("")) && (url != null)) {
+				props.setProperty("httpURL", url);
+			}
+			//System.out.println(props.toString());
 		}
 		catch (Exception noProps) {
 			Log.getInstance().append("Unable to load the config properties\n");
@@ -648,7 +686,7 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 	private String getDFScriptObject() {
 		String filterScript = null;
 		if (config.getProperty("dfEnabled", "no").equals("yes")) {
-			String dfName = config.getProperty("dfName", "DF.script");
+			String dfName = config.getProperty("dfScriptName", "DF.script");
 			File dfFile = getTextFile(dfName, "/DF.script");
 			if (dfFile != null) filterScript = FileUtil.getText(dfFile);
 			else Log.getInstance().append("Unable to obtain the DicomFilter script\n");
@@ -659,8 +697,8 @@ public class CTPClient extends JFrame implements ActionListener, ComponentListen
 	private PixelScript getDPAPixelScriptObject() {
 		PixelScript pixelScript = null;
 		if (config.getProperty("dpaEnabled", "no").equals("yes")) {
-			String daLUTName = config.getProperty("dpaName", "DPA.script");
-			File dpaFile = getTextFile(daLUTName, "/DPA.script");
+			String dpaScriptName = config.getProperty("dpaScriptName", "DPA.script");
+			File dpaFile = getTextFile(dpaScriptName, "/DPA.script");
 			if (dpaFile != null) pixelScript = new PixelScript(dpaFile);
 			else Log.getInstance().append("Unable to obtain the DicomPixelAnonymizer script\n");
 		}

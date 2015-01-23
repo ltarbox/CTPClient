@@ -48,6 +48,8 @@ public class SenderThread extends Thread {
 	IntegerTable integerTable = null;
 
 	static final int retryCount = 5;
+	static final int readTimeout = 5000;
+	static final String JPEGBaseline = "1.2.840.10008.1.2.4.50";
 
     public SenderThread (CTPClient parent) {
 		super("SenderThread");
@@ -189,7 +191,7 @@ public class SenderThread extends Thread {
 		if (integerTable != null) integerTable.close();
 		String resultText = "Processsing complete: ";
 		resultText += fileNumber+" file"+plural(fileNumber)+" processed";
-		if (fileNumber > 0) resultText += "; "+successes+" file"+plural(fileNumber)+" successfully exported";
+		if (fileNumber > 0) resultText += "; "+successes+" file"+plural(successes)+" successfully exported";
 		statusPane.setText(resultText);
 		parent.transmissionComplete();
 	}
@@ -220,7 +222,8 @@ public class SenderThread extends Thread {
 				if (signature != null) {
 					Regions regions = signature.regions;
 					if ((regions != null) && (regions.size() > 0)) {
-						if (dob.isEncapsulated()) DICOMDecompressor.decompress(temp, temp);
+						boolean isJPEGBaseline = dob.hasTransferSyntaxUID(JPEGBaseline);
+						if (dob.isEncapsulated() && !isJPEGBaseline) DICOMDecompressor.decompress(temp, temp);
 						AnonymizerStatus status = DICOMPixelAnonymizer.anonymize(temp, temp, regions, setBurnedInAnnotation, false);
 						if (status.isOK()) {
 							try { dob = new DicomObject(temp); }
@@ -278,6 +281,7 @@ public class SenderThread extends Thread {
 				OutputStream svros;
 				//Establish the connection
 				conn = HttpUtil.getConnection(new URL(httpURLString));
+				conn.setReadTimeout(readTimeout);
 				conn.connect();
 				svros = conn.getOutputStream();
 
@@ -292,7 +296,7 @@ public class SenderThread extends Thread {
 				//Check the response text.
 				//Note: this rather odd way of acquiring a success
 				//result is for backward compatibility with MIRC.
-				String result = FileUtil.getText( conn.getInputStream() );
+				String result = FileUtil.getTextOrException( conn.getInputStream(), FileUtil.utf8 );
 				if (result.equals("OK")) return true;
 			}
 			catch (Exception ex) { msg = ex.getMessage(); }
